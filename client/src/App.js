@@ -44,9 +44,9 @@ class App extends Component {
         isAuthorized: true,
         firstName: profile.localizedFirstName,
         lastName: profile.localizedLastName,
-        headline: profile.headline.localized[`${profile.headline.preferredLocale.language}_${profile.headline.preferredLocale.country}`],
-        profileUrl: `https://www.linkedin.com/in/${profile.vanityName}`,
-        summary: profile.summary.localized[`${profile.summary.preferredLocale.language}_${profile.summary.preferredLocale.country}`].rawText
+        // headline: profile.headline.localized[`${profile.headline.preferredLocale.language}_${profile.headline.preferredLocale.country}`],
+        // profileUrl: `https://www.linkedin.com/in/${profile.vanityName}`,
+        // summary: profile.summary.localized[`${profile.summary.preferredLocale.language}_${profile.summary.preferredLocale.country}`].rawText
       })
   }
 
