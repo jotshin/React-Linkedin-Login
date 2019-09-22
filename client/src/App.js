@@ -34,16 +34,16 @@ class App extends Component {
     if (event.data.type === "profile") {
       debugger;
       this.updateProfile(event.data.profile);
-      Alert.success(`Login successful: ${event.data.profile.localizedFirstName}`,{position:'top'});
+      Alert.success(`Login successful: ${event.data.profile.firstName.localized.en_US}`,{position:'top'});
     }
   };
 
   updateProfile = (profile) => {
-    console.log(profile)
       this.setState({
         isAuthorized: true,
-        firstName: profile.localizedFirstName,
-        lastName: profile.localizedLastName,
+        firstName: profile.firstName.localized.en_US,
+        lastName: profile.lastName.localized.en_US,
+        pictureURL: profile.profilePicture['displayImage~'].elements[0].identifiers[0].identifier
         // headline: profile.headline.localized[`${profile.headline.preferredLocale.language}_${profile.headline.preferredLocale.country}`],
         // profileUrl: `https://www.linkedin.com/in/${profile.vanityName}`,
         // summary: profile.summary.localized[`${profile.summary.preferredLocale.language}_${profile.summary.preferredLocale.country}`].rawText

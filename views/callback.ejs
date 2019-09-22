@@ -6,11 +6,12 @@
   </head>
   <body>
     <h1>Login Successful</h1>
-    <p>Profile: <%= profile.localizedFirstName %></p>
+    <p>Profile: <%= profile.firstName.localized.en_US %></p>
   </body>
   <script>
-    var profile = <%- JSON.stringify(profile)  %>
-    window.opener.postMessage({'type': 'profile', 'profile': profile}, '*')
+    var profileString = <%- JSON.stringify(profile)  %>
+    <%- console.log(profile.firstName.localized.en_US) %>
+    window.opener.postMessage({'type': 'profile', 'profile': profileString}, '*')
     window.close();
   </script>
 </html>

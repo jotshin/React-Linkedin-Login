@@ -5,31 +5,23 @@ require('dotenv').config()
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  console.log('in callback!')
-  
-  requestAccessToken(req.query.code,req.query.state)
+  requestAccessToken(req.query.code, req.query.state)
   .then((response) => {
-    console.log('in access token response! token=', response.body.access_token)
-
     requestProfile(response.body.access_token)
     .then(response => {
-      console.log(response.body)
-
+      // sent to template engine
       res.render('callback', { profile: response.body});
     })
     .catch((error) => {
-      console.log('profile error', error.stack)
-      res.send(`${error}`)
+      res.send(`${error}`);
     })
   })
   .catch((error) => {
-    console.log('token error', error.stack)
     res.send(`${error}`)
   })
 });
 
 function requestAccessToken(code,state) {
-  console.log('posting for accessToken!')
 
   return request.post('https://www.linkedin.com/oauth/v2/accessToken')
     .send('grant_type=authorization_code')
@@ -41,7 +33,9 @@ function requestAccessToken(code,state) {
 }
 
 function requestProfile(token) {
-  return request.get('https://api.linkedin.com/v2/me')
+  // https://developer.linkedin.com/docs/ref/v2/profile/profile-picture
+  // https://stackoverflow.com/questions/54484700/retrieving-the-profile-image-from-linkedin-api-response
+  return request.get('https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))')
   .set('Authorization', `Bearer ${token}`)
 }
 

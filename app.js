@@ -20,6 +20,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+// the order seems to matter here
+// redirection needs to be put before static
 app.use('/callback', callback);
 app.use(express.static(path.join(__dirname, 'public')));
 
